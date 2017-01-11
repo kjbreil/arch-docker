@@ -4,21 +4,24 @@ DOCKER_CMD?=not yet
 ARCH_BASE?=uhh
 
 
-.PHONY: default runmake
+.PHONY: default init all rootfs images release clone pull push
 
-default: runmake
+default: images
 
 init: clone pull
 
-images:
+all: rootfs images
+
+rootfs:
 	cd arch-base && $(MAKE) rootfs
+
+images:
 	cd arch-base && $(MAKE)
 	cd arch-build && $(MAKE)
-	cd arch-apacman && $(MAKE)
+	cd arch-makepkg && $(MAKE)
 
 release:
 	cd arch-base && $(MAKE) release
-	cd arch-build && $(MAKE) release
 	cd arch-build && $(MAKE) release
 
 clone:
@@ -31,7 +34,7 @@ pull:
 	-cd arch-build && git pull 
 	-cd arch-apacman && git pull 
 
-push:
-	cd arch-base && git push 
-	cd arch-build && git push 
-	cd arch-apacman && git push 
+pack:
+	cd arch-makepkg && $(MAKE) images
+	cd arch-makepkg && $(MAKE) run
+	cd arch-makepkg && $(MAKE) pack
