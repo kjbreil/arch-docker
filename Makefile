@@ -4,18 +4,18 @@ DOCKER_CMD?=not yet
 ARCH_BASE?=uhh
 
 
-.PHONY: default init all rootfs images arch-base arch-build arch-yaourt arch-plex release clone pull push clean rm_ps rm_im
+.PHONY: default init all rootfs images arch-base arch-build arch-yaourt arch-plex release clone pull push clean rm_ps rm_im arch-pacstrap
 
 default: images
 
 init: clone pull
 
-all: rootfs images
+all: rootfs clean images
 
 rootfs:
 	cd arch-base && $(MAKE) rootfs
 
-images: arch-base arch-build arch-yaourt arch-plex
+images: arch-base arch-build arch-yaourt
 
 arch-base:
 	cd arch-base && $(MAKE)
@@ -29,6 +29,9 @@ arch-yaourt:
 arch-plex:
 	cd arch-plex && $(MAKE)
 
+arch-pacstrap:
+	cd arch-pacstrap && $(MAKE)
+
 release:
 	cd arch-base && $(MAKE) release
 	cd arch-build && $(MAKE) release
@@ -39,16 +42,20 @@ push:
 	cd arch-build && $(MAKE) push
 	cd arch-yaourt && $(MAKE) push
 
+heim:
+	cd arch-base && $(MAKE) heim
+	cd arch-build && $(MAKE) heim
+	cd arch-yaourt && $(MAKE) heim
+
 clone:
 	git clone https://github.com/kjbreil/arch-base.git
 	git clone https://github.com/kjbreil/arch-build.git
 	git clone https://github.com/kjbreil/arch-yaourt.git
-	git clone https://github.com/kjbreil/arch-plex.git
 
 pull:
 	-cd arch-base && git pull 
 	-cd arch-build && git pull 
-	-cd arch-apacman && git pull 
+	-cd arch-yaourt && git pull 
 
 clean: rm_ps rm_im
 
