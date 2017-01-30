@@ -57,7 +57,7 @@ pull:
 	-cd arch-base && git pull 
 	-cd arch-build && git pull 
 	-cd arch-yaourt && git pull 
-	-cd transcod && git pull
+	-cd transcode && git pull
 
 clean: rm_ps rm_im
 
