@@ -48,14 +48,16 @@ heim:
 	cd arch-yaourt && $(MAKE) heim
 
 clone:
-	git clone https://github.com/kjbreil/arch-base.git
-	git clone https://github.com/kjbreil/arch-build.git
-	git clone https://github.com/kjbreil/arch-yaourt.git
+	-git clone clone git@github.com:kjbreil/arch-base.git
+	-git clone clone git@github.com:kjbreil/arch-build.git
+	-git clone clone git@github.com:kjbreil/arch-yaourt.git
+	-git clone clone git@github.com:kjbreil/transcode.git
 
 pull:
 	-cd arch-base && git pull 
 	-cd arch-build && git pull 
 	-cd arch-yaourt && git pull 
+	-cd transcod && git pull
 
 clean: rm_ps rm_im
 
