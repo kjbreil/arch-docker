@@ -10,12 +10,14 @@ default: images
 
 init: clone pull
 
-all: rootfs clean images
+all: rootfs clean images apps
 
 rootfs:
 	cd arch-base && $(MAKE) rootfs
 
 images: arch-base arch-build arch-yaourt
+
+apps: transcode
 
 arch-base:
 	cd arch-base && $(MAKE)
@@ -31,6 +33,9 @@ arch-plex:
 
 arch-pacstrap:
 	cd arch-pacstrap && $(MAKE)
+
+transcode:
+	cd transcode && $(MAKE)
 
 release:
 	cd arch-base && $(MAKE) release
