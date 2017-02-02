@@ -10,7 +10,7 @@ default: images
 
 init: clone pull
 
-all: rootfs clean images apps
+all: rootfs images apps
 
 rootfs:
 	cd arch-base && $(MAKE) rootfs
@@ -64,10 +64,3 @@ pull:
 	-cd arch-yaourt && git pull 
 	-cd transcode && git pull
 
-clean: rm_ps rm_im
-
-rm_ps:
-	-docker rm -f $$(docker ps -aq)
-
-rm_im:
-	-docker rmi -f $$(docker images -aq)
