@@ -1,2 +1,3 @@
 # All folders under root should be git repositories =
 */*
+**/.DS_Store
